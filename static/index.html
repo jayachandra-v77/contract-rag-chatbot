@@ -2,38 +2,90 @@
 <html>
 
 <head>
-<title>EY Contract AI</title>
+<title>AI Contract Chatbot</title>
 
 <style>
 
 body{
 background:#0f172a;
-color:white;
 font-family:Arial;
+display:flex;
+justify-content:center;
+align-items:center;
+height:100vh;
+color:white;
+}
+
+.chat-container{
+width:420px;
+height:550px;
+background:#1e293b;
+border-radius:12px;
+display:flex;
+flex-direction:column;
+overflow:hidden;
+box-shadow:0 0 10px rgba(0,0,0,0.5);
+}
+
+.chat-header{
+background:#22c55e;
+padding:15px;
+font-size:18px;
 text-align:center;
 }
 
-.chatbox{
-width:400px;
-margin:auto;
-margin-top:100px;
+.chat-box{
+flex:1;
+padding:15px;
+overflow-y:auto;
+}
+
+.message{
+margin:10px 0;
+padding:10px;
+border-radius:8px;
+max-width:75%;
+}
+
+.user{
+background:#3b82f6;
+align-self:flex-end;
+margin-left:auto;
+}
+
+.bot{
+background:#334155;
+}
+
+.input-area{
+display:flex;
+border-top:1px solid #475569;
 }
 
 input{
-width:70%;
-padding:10px;
+flex:1;
+padding:12px;
 border:none;
-}
-
-button{
-padding:10px;
-background:#22c55e;
-border:none;
+outline:none;
+background:#0f172a;
 color:white;
 }
 
-#response{
-margin-top:20px;
+button{
+padding:12px;
+background:#22c55e;
+border:none;
+color:white;
+cursor:pointer;
+}
+
+button:hover{
+background:#16a34a;
+}
+
+.robot{
+font-size:24px;
+margin-right:6px;
 }
 
 </style>
@@ -42,20 +94,22 @@ margin-top:20px;
 
 <body>
 
-<h2>🤖 Contract PDF AI Chatbot</h2>
+<div class="chat-container">
 
-<div class="chatbox">
+<div class="chat-header">
+<span class="robot">🤖</span> AI Contract Docseach Assistant
+</div>
 
-<input id="question" placeholder="Ask about contract..." />
+<div id="chatBox" class="chat-box"></div>
 
-<button onclick="ask()">Send</button>
-
-<p id="response"></p>
+<div class="input-area">
+<input id="question" placeholder="Ask something..." onkeypress="handleKey(event)">
+<button onclick="send()">Send</button>
+</div>
 
 </div>
 
-<script src="style.js"></script>
+<script src="/static/script.js"></script>
 
 </body>
-
 </html>
