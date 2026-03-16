@@ -16,32 +16,7 @@ This project demonstrates how to build an **AI document assistant** using **Fast
 * ⚙ GitHub Actions CI/CD pipeline
 * 🧠 Vector search using embeddings
 
----
 
-# 📂 Project Structure
-
-```text
-contract-rag-bot
-│
-├── app
-│   ├── main.py
-│   └── rag_pipeline.py
-│
-├── ingestion
-│   └── ingest.py
-│
-├── templates
-│   └── index.html
-│
-├── data
-│   └── contracts
-│
-├── requirements.txt
-├── Dockerfile
-└── .github/workflows/deploy.yml
-```
-
----
 
 # ⚙ Installation (Local)
 
