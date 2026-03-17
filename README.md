@@ -4,7 +4,7 @@ A simple **AI chatbot that answers questions from contract PDFs** using **Retrie
 
 This project demonstrates how to build an **AI document assistant** using **FastAPI, LangChain, Docker, GitHub CI/CD, and AWS (EC2 + ECR)**.
 
----
+-------
 
 # 🚀 Features
 
