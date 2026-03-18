@@ -47,7 +47,7 @@ http://localhost:8000
 
 ---
 
-# 🤖 Example Questions
+### Example Questions
 
 You can ask questions like:
 
@@ -56,62 +56,7 @@ You can ask questions like:
 * When does the contract expire?
 * What is the confidentiality clause?
 
----
-
-# 🐳 Docker
-
-Build Docker image
-
-```bash
-docker build -t contract-rag-bot .
-```
-
-Run container
-
-```bash
-docker run -p 8000:8000 contract-rag-bot
-```
-
----
-
-# ☁ AWS Deployment
-
-This project uses:
-
-* AWS EC2 (to run the application)
-* AWS ECR (to store Docker images)
-
-Steps:
-
-1. Push Docker image to ECR
-2. Pull the image in EC2
-3. Run the container
-
-Application will run at:
-
-```
-http://EC2_PUBLIC_IP:8000
-```
-
----
-
-# ⚙ CI/CD
-
-GitHub Actions automatically:
-
-1. Builds Docker image
-2. Pushes image to AWS ECR
-3. Deploys to EC2
-
-Workflow file:
-
-```
-.github/workflows/deploy.yml
-```
-
----
-
-# 🛠 Tech Stack
+### Tech Stack
 
 Backend
 
@@ -125,17 +70,8 @@ AI
 
 Vector Database
 
-* ChromaDB
+* PINECONE
 
-Cloud
-
-* AWS EC2
-* AWS ECR
-
-DevOps
-
-* Docker
-* GitHub Actions
 
 Frontend
 
@@ -145,6 +81,6 @@ Frontend
 
 ---
 
-# 👨‍💻 Author
+### Author
 
 Jayachandra
