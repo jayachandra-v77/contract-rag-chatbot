@@ -1,4 +1,4 @@
-# 🤖 Contract PDF RAG Chatbot
+## 🤖 Contract PDF RAG Chatbot
 
 A simple **AI chatbot that answers questions from contract PDFs** using **Retrieval Augmented Generation (RAG)**.
 
@@ -6,14 +6,11 @@ This project demonstrates how to build an **AI document assistant** using **Fast
 
 -------
 
-# 🚀 Features
+###  Features
 
 * 📄 Ask questions from contract PDFs
 * 🤖 AI-powered chatbot responses
 * 🌙 Dark mode chatbot interface with robot icon
-* 🐳 Docker containerization
-* ☁ Deployment on AWS EC2
-* ⚙ GitHub Actions CI/CD pipeline
 * 🧠 Vector search using embeddings
 
 
