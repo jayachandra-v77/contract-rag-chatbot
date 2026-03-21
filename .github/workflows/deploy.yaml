@@ -4,6 +4,10 @@ on:
   push:
     branches: [main]
 
+# Force Node.js 24 to avoid deprecation warnings
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
 jobs:
   Continuous-Integration:
     runs-on: ubuntu-latest
