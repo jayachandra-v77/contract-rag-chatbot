@@ -1,23 +1,18 @@
 async function sendMessage() {
     const input = document.getElementById("question");
-    const chat = document.getElementById("chat");
-
     const question = input.value.trim();
+
     if (!question) return;
 
     // Show user message
-    const userMsg = document.createElement("div");
-    userMsg.className = "message user";
-    userMsg.innerText = question;
-    chat.appendChild(userMsg);
-
+    addMessage(question, "user");
     input.value = "";
 
-    // Scroll down
-    chat.scrollTop = chat.scrollHeight;
+    // Show loading
+    const loadingMsg = addMessage("Loading...", "bot");
 
     try {
-        const response = await fetch("/ask", {
+        const response = await fetch("http://127.0.0.1:8000/ask", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -27,15 +22,38 @@ async function sendMessage() {
 
         const data = await response.json();
 
-        // Show bot message
-        const botMsg = document.createElement("div");
-        botMsg.className = "message bot";
-        botMsg.innerText = data.answer;
-        chat.appendChild(botMsg);
-
-        chat.scrollTop = chat.scrollHeight;
+        // Replace loading text
+        loadingMsg.innerText = data.answer;
 
     } catch (error) {
-        console.error(error);
+        loadingMsg.innerText = "Error connecting to server!";
+    }
+}
+
+// Add message to UI
+function addMessage(text, sender) {
+    const chat = document.getElementById("chat");
+
+    const msg = document.createElement("div");
+    msg.classList.add("message");
+
+    if (sender === "user") {
+        msg.classList.add("user");
+    } else {
+        msg.classList.add("bot");
+    }
+
+    msg.innerText = text;
+    chat.appendChild(msg);
+
+    chat.scrollTop = chat.scrollHeight;
+
+    return msg;
+}
+
+// Enter key support
+function handleEnter(event) {
+    if (event.key === "Enter") {
+        sendMessage();
     }
 }

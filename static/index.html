@@ -38,6 +38,8 @@
             flex: 1;
             padding: 10px;
             overflow-y: auto;
+            display: flex;
+            flex-direction: column; /* IMPORTANT */
         }
 
         .message {
@@ -91,13 +93,13 @@
 
 <div class="chat-container">
     <div class="chat-header">
-        🤖 AI Chatbot DocSearch Assitant
+        🤖 AI Chatbot DocSearch Assistant
     </div>
 
     <div class="chat-body" id="chat"></div>
 
     <div class="chat-footer">
-        <input type="text" id="question" placeholder="Ask something...">
+        <input type="text" id="question" placeholder="Ask something..." onkeydown="handleEnter(event)">
         <button onclick="sendMessage()">Send</button>
     </div>
 </div>
