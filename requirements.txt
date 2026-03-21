@@ -5,3 +5,5 @@ langchain-community
 langchain-pinecone
 pinecone
 python-dotenv
+certifi
+pydantic
