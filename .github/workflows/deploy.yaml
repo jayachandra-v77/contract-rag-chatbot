@@ -4,6 +4,9 @@ on:
   push:
     branches: [main]
 
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true  # ✅ Opt-in Node.js 24
+
 jobs:
   Continuous-Integration:
     runs-on: ubuntu-latest
@@ -38,7 +41,7 @@ jobs:
     runs-on: self-hosted
 
     steps:
-      - name: Configure AWS credentials   # ✅ FIXED
+      - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
@@ -63,8 +66,8 @@ jobs:
       - name: Run container
         run: |
           docker run -d \
-          --name rag-chatbot \
-          -p 8080:8000 \
-          -e PINECONE_API_KEY="${{ secrets.PINECONE_API_KEY }}" \
-          -e OPENAI_API_KEY="${{ secrets.OPENAI_API_KEY }}" \
-          ${{ steps.login-ecr.outputs.registry }}/${{ secrets.ECR_REPO }}:latest
+            --name rag-chatbot \
+            -p 8080:8000 \
+            -e PINECONE_API_KEY="${{ secrets.PINECONE_API_KEY }}" \
+            -e OPENAI_API_KEY="${{ secrets.OPENAI_API_KEY }}" \
+            ${{ steps.login-ecr.outputs.registry }}/${{ secrets.ECR_REPO }}:latest
