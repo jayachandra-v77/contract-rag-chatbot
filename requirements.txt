@@ -1,9 +1,7 @@
-langchain==0.1.17
-langchain-pinecone
+fastapi
+uvicorn
 langchain-openai
 langchain-community
-pinecone==3.2.2
-pypdf
-fastapi
+langchain-pinecone
+pinecone
 python-dotenv
-uvicorn
