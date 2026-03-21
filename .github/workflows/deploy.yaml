@@ -1,22 +1,19 @@
-name: Deploy Application Docker Image to EC2
+name: Deploy Application Docker Image to EC2 instance
 
 on:
   push:
     branches: [main]
 
-env:
-  # Opt into Node.js 24 for actions that support it
-  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
-
 jobs:
   Continuous-Integration:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v6
+      - name: Checkout
+        uses: actions/checkout@v4
 
       - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@v6
+        uses: aws-actions/configure-aws-credentials@v4
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
@@ -25,6 +22,8 @@ jobs:
       - name: Login to Amazon ECR
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v2
+        with:
+          mask-password: true
 
       - name: Build & Push Docker Image
         env:
@@ -37,9 +36,10 @@ jobs:
   Continuous-Deployment:
     needs: Continuous-Integration
     runs-on: self-hosted
+
     steps:
-      - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@v6
+      - name: Configure AWS credentials   # ✅ FIXED
+        uses: aws-actions/configure-aws-credentials@v4
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
@@ -48,8 +48,10 @@ jobs:
       - name: Login to Amazon ECR
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v2
+        with:
+          mask-password: true
 
-      - name: Pull latest Docker image
+      - name: Pull latest image
         run: |
           docker pull ${{ steps.login-ecr.outputs.registry }}/${{ secrets.ECR_REPO }}:latest
 
@@ -61,12 +63,8 @@ jobs:
       - name: Run container
         run: |
           docker run -d \
-            --name rag-chatbot \
-            --restart unless-stopped \
-            -p 8080:8000 \
-            -e PINECONE_API_KEY="${{ secrets.PINECONE_API_KEY }}" \
-            -e OPENAI_API_KEY="${{ secrets.OPENAI_API_KEY }}" \
-            ${{ steps.login-ecr.outputs.registry }}/${{ secrets.ECR_REPO }}:latest
-
-      - name: Clean dangling images (optional)
-        run: docker image prune -f
+          --name rag-chatbot \
+          -p 8080:8000 \
+          -e PINECONE_API_KEY="${{ secrets.PINECONE_API_KEY }}" \
+          -e OPENAI_API_KEY="${{ secrets.OPENAI_API_KEY }}" \
+          ${{ steps.login-ecr.outputs.registry }}/${{ secrets.ECR_REPO }}:latest
